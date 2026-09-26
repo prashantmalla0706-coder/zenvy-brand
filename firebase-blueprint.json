@@ -1,0 +1,100 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user identity, VIP tier, and profile attributes",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "photoURL": { "type": "string", "maxLength": 512 },
+        "tier": { "type": "string", "maxLength": 64 },
+        "createdAt": { "type": "string", "maxLength": 64 },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["userId", "email"]
+    },
+    "WishlistItem": {
+      "title": "Wishlist Item",
+      "description": "Saved garment in user wishlist",
+      "type": "object",
+      "properties": {
+        "productId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "addedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["productId", "userId"]
+    },
+    "UserCartItem": {
+      "title": "Cart Item",
+      "description": "Item in shopping bag",
+      "type": "object",
+      "properties": {
+        "productId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 256 },
+        "price": { "type": "number" },
+        "color": { "type": "string", "maxLength": 64 },
+        "size": { "type": "string", "maxLength": 32 },
+        "quantity": { "type": "number" },
+        "image": { "type": "string", "maxLength": 512 },
+        "updatedAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["productId", "userId", "color", "size", "quantity"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Completed garment order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "subtotal": { "type": "number" },
+        "shipping": { "type": "number" },
+        "discount": { "type": "number" },
+        "total": { "type": "number" },
+        "status": { "type": "string", "maxLength": 64 },
+        "trackingNumber": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "userId", "total", "status"]
+    },
+    "ChatMessage": {
+      "title": "Chat Message",
+      "description": "Multi-turn concierge conversation message",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "role": { "type": "string", "maxLength": 32 },
+        "text": { "type": "string", "maxLength": 10000 },
+        "mode": { "type": "string", "maxLength": 32 },
+        "createdAt": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["id", "userId", "role", "text"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile document"
+    },
+    "/users/{userId}/wishlist/{productId}": {
+      "schema": "WishlistItem",
+      "description": "User saved wishlist items"
+    },
+    "/users/{userId}/cart/{cartItemId}": {
+      "schema": "UserCartItem",
+      "description": "User shopping bag items"
+    },
+    "/users/{userId}/orders/{orderId}": {
+      "schema": "Order",
+      "description": "User order acquisitions"
+    },
+    "/users/{userId}/chat_messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "User personal concierge dialogue history"
+    }
+  }
+}

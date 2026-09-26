@@ -1,0 +1,6 @@
+{
+  "name": "AÉTER ATELIER - Modern Fashion",
+  "description": "Modern luxury fashion clothing brand. Define your style. Wear your identity. Explore contemporary tailoring, oversized streetwear, and refined essentials.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
